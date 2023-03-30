@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Nature Camper</title>
+  <!--视口/视觉窗口标签:meta, 宽度=设备宽度，初始化缩放比例1， 是否允许用户缩放页面:no -->
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+  <!-- 扩展对低版本IE支持,开启IE兼容模式-->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- Bootstrap核心css -->
+  <link rel="stylesheet" type="text/css" href="./bootstrap3/css/bootstrap.css">
+  <!-- 字体图标 -->
+  <link rel="stylesheet" href="browser_components/vue-select/dist/vue-select.css">
+  <link rel="stylesheet" type="text/css" href="./bootstrap3/font-awesome-4.7.0/css/font-awesome.css">
+  <link rel="stylesheet" type="text/css" href="./css/logo.css">
+  <script src="browser_components/vue/dist/vue.js"></script>
+  <script src="browser_components/vue-select/dist/vue-select.js"></script>
+</head>
+<body>
+<header class="container-fluid" id="header">
+  <div class="row">
+    <div class="col-md-3" id="image">
+      <image src="./images/logo.png"></image>
+    </div>
+    <div class="col-md-7" id="top"  th:replace="index::head" >
+      <ul class="nav nav-pills" id="ul">
+        <li role="presentation"><a href="/index.html" style="color: #080808"><b>首頁</b></a></li>
+        <li role="presentation"><a href="/index_type1.html" style="color: #080808"><b>帳篷</b></a></li>
+        <li role="presentation"><a href="/index_type2.html" style="color: #080808"><b>天幕</b></a></li>
+        <li role="presentation"><a href="/index_type3.html" style="color: #080808"><b>氣墊床</b></a></li>
+        <li role="presentation"><a href="/car.html" style="color: #080808"><b>購物車</b><span class="badge" v-text="CarVo.row">42</span></a></li>
+      </ul>
+    </div>
+    <div class="col-md-2" id="right" th:replace="index::Info">
+      <div id="my">
+        <div class="dropdown">
+          <b><span>使用者:</span></b>
+          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="border: none">
+            <span v-text="userVo.nickname"></span>
+            <span class="caret" ></span>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <li><a href="#">我的購物清單</a></li>
+            <li><a href="/changePassword.html" v-bind:href="'/changePassword.html?'+userVo.id">更改密碼</a></li>
+            <li><a href="/logout">登出</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div id="orderApp">
+<form method="get" action="/pay" v-on:submit.prevent="insertorder">
+<div style="padding-top: 80px" align="center">
+  <div align="center"><span style="font-size: large" class="glyphicon glyphicon-file">購買資訊</span></div><br>
+  <table class="table table-bordered" style="border:3px black solid;width:auto; height: auto;" align="center">
+    <tr><td>真實姓名:</td><td><input type="text" placeholder="請輸入姓名" v-model="username"></td></tr><tr>
+    </tr><tr><td>聯絡電話:</td><td><input type="text" placeholder="09xx-xxx-xxx" v-model="phone"></td></tr><tr>
+    </tr>
+    <tr>
+      <td>送件地址:</td>
+      <td>
+     <select class="city" v-on:click="getrange" style="width: 150px ;display: inline" >
+     <option value="台北市">台北市</option>
+    <option value="新北市">新北市</option>
+      <option value="桃園市">桃園市</option>
+        <option value="基隆市">基隆市</option>
+      <option value="新竹市">新竹市</option>
+      <option value="台中市">台中市</option>
+      <option value="嘉義市">嘉義市</option>
+      <option value="台南市">台南市</option>
+        <option value="高雄市">高雄市</option>
+      <option value="新竹縣">新竹縣</option>
+      <option value="苗栗縣">苗栗縣</option>
+      <option value="彰化縣">彰化縣</option>
+     <option value="南投縣">南投縣</option>
+     <option value="雲林縣">雲林縣</option>
+      <option value="嘉義縣">嘉義縣</option>
+      <option value="屏東縣">屏東縣</option>
+     <option value="台東縣">台東縣</option>
+      <option value="花蓮縣">花蓮縣</option>
+      <option value="宜蘭縣">宜蘭縣</option>
+   </select>
+
+
+<!--          <v-select style="width: 150px"  required v-bind:options="city"  v-model="selectcity" v-on:select="getrange" placeholder="請選擇縣市" >&ndash;&gt;&ndash;&gt;-->
+<!--          </v-select>-->
+        <v-select style="width: 150px"  required v-bind:options="range" v-model="selectrange" placeholder="請選擇區域" >
+    </v-select>
+
+      <a href="https://www.post.gov.tw/post/internet/Postal/index.jsp?ID=208">中華郵政郵遞區號查詢</a>
+      <span>郵遞區號:</span>
+      <input type="text" maxlength="5" style="width: 50px" v-model="num">
+      <span>地址:</span>
+      <input type="text" placeholder="請輸入地址" style="width: 200px" v-model="address">
+      <input type="text"style="width: 30px" v-model="floor">樓
+      </td>
+    </tr>
+    <tr>
+    <td>付款方式:</td>
+    <td>
+      <input name="pay" type="radio" value="2"  v-model="type2"><span>paypal</span>
+    </td>
+    </tr><tr>
+  </tr></table>
+  <button class="btn btn-primary" type="submit">確認送出</button>
+</div>
+</form>
+</div>
+
+
+</body>
+<!-- jQuery 1.12.4 依赖 -->
+<script type="text/javascript" src="./bootstrap3/jquery.min.js"></script>
+<!-- Bootstrap核心js -->
+<script type="text/javascript" src="./bootstrap3/js/bootstrap.js"></script>
+<!-- 图片占位，解决低版本IE不支持圆角的问题-->
+<script type="text/javascript" src="./bootstrap3/js/holder.js"></script>
+<!-- 引入T5和C3的js函数库，支持旧版浏览器-->
+<script type="text/javascript" src="./bootstrap3/js/html5shiv.min.js"></script>
+<script type="text/javascript" src="./bootstrap3/js/css3-mediaqueries.js"></script>
+<script type="text/javascript" src="./bootstrap3/js/respond.min.js"></script>
+<script src="/js/utils.js"></script>
+<script src="/js/user.js"></script>
+<script src="/js/order.js"></script>
+</html>
+</script>

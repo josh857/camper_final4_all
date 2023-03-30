@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Camper</title>
+    <!--视口/视觉窗口标签:meta, 宽度=设备宽度，初始化缩放比例1， 是否允许用户缩放页面:no -->
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <!-- 扩展对低版本IE支持,开启IE兼容模式-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Bootstrap核心css -->
+    <link rel="stylesheet" type="text/css" href="./bootstrap3/css/bootstrap.css">
+    <!-- 字体图标 -->
+    <script src="https://kit.fontawesome.com/19a024a8c9.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="./bootstrap3/font-awesome-4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="./css/logo.css">
+    <link rel="stylesheet" type="text/css" href="./css/product.css">
+    <script src="browser_components/vue/dist/vue.js"></script>
+</head>
+<body id="product_body">
+<header class="container-fluid" id="header">
+    <div class="row">
+        <div class="col-md-3" id="image">
+            <image src="./images/logo.png"></image>
+        </div>
+        <div class="col-md-6" id="top">
+            <ul class="nav nav-pills" id="ul">
+                <li role="presentation"><a href="/index.html" style="color: #080808"><i class="fa-sharp fa-solid fa-house-user"></i><b>首頁</b></a></li>
+                <li role="presentation"><a href="/index_type1.html" style="color: #080808"><i class="fa-sharp fa-solid fa-campground"></i><b>帳篷</b></a></li>
+                <li role="presentation"><a href="/index_type2.html" style="color: #080808"><i class="fa-sharp fa-solid fa-people-roof"></i><b>天幕</b></a></li>
+                <li role="presentation"><a href="/index_type3.html" style="color: #080808"><i class="fa-sharp fa-solid fa-bed"></i><b>氣墊床</b></a></li>
+                <li role="presentation"><a href="/car.html" style="color: #080808"><i class="fa-sharp fa-solid fa-cart-plus"></i><span class="badge" v-text="CarVo.row">42</span></a></li>
+            </ul>
+        </div>
+        <div class="col-md-3" id="right" th:replace="index::Info">
+
+            <div class="dropdown">
+                <b><span>使用者:</span></b>
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="border: none">
+                    張大千
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <li><a href="#">我的購物清單</a></li>
+                    <li><a href="#">更改密碼</a></li>
+                    <li><a href="#">登出</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+<!--內容開始-->
+<div class="container-fluid" id="product_content">
+    <div class="row" >
+    <!--商品左側開始-->
+        <div id="detail">
+    <div class="col-md-9" id="product" align="center">
+        <div >
+        <table  class="table table-bordered" style="width: 750px;height: 250px;background-color: #c1e2b3 ">
+            <tr align="center">
+                <th colspan="2"><image v-bind:src="'./images/'+product.images" style="width: 450px;height: 350px"></image></th>
+               <td align="left">
+                   <span style="font-size: 30px">商品名稱 </span><br><br><br>
+                   <span style="font-size: large; margin-top: 50px" v-text="product.title">[Nature Camper] 4-6 人透氣圓頂露營帳V (入門套裝組)</span>
+               </td>
+            </tr>
+            <tr align="left" style="font-size: large">
+                <td colspan="3">
+                    <span v-text="product.content">帳棚也講究設計！
+                        5窗+1大門每個窗戶跟大門都有紗窗這款帳篷超適合新手跟老手使用
+                        搭建完成時間說10秒.. 還真是太久了!!
+                        多搭兩次 說不定五秒都不到就只是一個"小力拉"的簡單動作，連國小的小朋友也會哦
+                        店長本身也是使用這組，空間很大呦～
+                        裡面還有銀膠塗層，防紫外線，防曬!! 隔熱效果絕佳五個窗，都是設計從裡面拉鏈開關的，通風設計超棒
+                        內部頂端還設計了一個吊勾可掛露營燈哦
+                        大量現貨！</span>
+                </td>
+            </tr>
+            <tr align="center" style="font-size: large">
+                <td colspan="3">
+                    <span>人數 :<span v-text="product.person">4-6</span>人</span><br>
+                </td>
+            </tr>
+            <tr align="center" style="font-size: large">
+                <td colspan="3">
+                    <span >功能:<span v-text="product.function">防水,防紫外線</span></span><br>
+                </td>
+            </tr>
+            <tr align="center" style="font-size: large">
+                <td colspan="3">
+                    <span style="color: red">會員價:$ <span v-text="product.price">3500 </span>元</span>
+                </td>
+            </tr>
+        </table>
+        </div>
+        <div>
+        <a href="" v-on:click.prevent="gotocar(product.id)" class="btn btn-primary" role="button">加入購物車</a>
+            <a href="/car.html" class="btn btn-primary" role="button">查看購物車</a>
+        </div>
+        </br></br>
+        <div>
+            <span>商品圖片</span>
+            <div  v-for=" i in imag">
+                <img style="display: block;width: 100%;height: auto;" v-bind:src="'./images/'+ i">
+            </div>
+        </div>
+    </div>
+    </div>
+    <!--商品左側結束-->
+    <!--商品右側開始-->
+<!--    <div class="col-md-3">-->
+<!--        <div><span style="margin-left:20px; font-weight: bold; font-size: medium">商品搜尋:</span></div>-->
+
+<!--        <form class="navbar-form navbar-left" role="search" method="get" action="">-->
+<!--            <div class="form-group">-->
+<!--                <input type="text" class="form-control" placeholder="請輸入商品" v-model="key">-->
+<!--            </div>-->
+<!--            <button type="submit" class="btn btn-default" v-on:click.prevent="getsearch(1)">搜尋</button>-->
+<!--        </form>-->
+<!--    </div>-->
+    <!--分頁-->
+
+    <!--熱門商品-->
+        <div class="col-md-3"  id="hotp" th:replace="index::hot">
+            <div style="margin-left: 20px;font-size:medium"><b><span>熱門商品:</span></b></div>
+
+            <div v-for="hot in product">
+                <a href="#">
+                    <image src="./images/1-2.jpg"  v-bind:src="'./images/'+hot.images" style="width: 350px;height: 250px"></image>
+                    <p v-text="hot.title">
+                        《ATUNAS歐都納》5-6人前延伸雙門快速帳/露營帳篷
+                    </p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+    <!--右側結束-->
+
+<!--內容結束-->
+
+
+
+
+</body>
+<!-- jQuery 1.12.4 依赖 -->
+<script type="text/javascript" src="./bootstrap3/jquery.min.js"></script>
+<!-- Bootstrap核心js -->
+<script type="text/javascript" src="./bootstrap3/js/bootstrap.js"></script>
+<!-- 图片占位，解决低版本IE不支持圆角的问题-->
+<script type="text/javascript" src="./bootstrap3/js/holder.js"></script>
+<!-- 引入T5和C3的js函数库，支持旧版浏览器-->
+<script type="text/javascript" src="./bootstrap3/js/html5shiv.min.js"></script>
+<script type="text/javascript" src="./bootstrap3/js/css3-mediaqueries.js"></script>
+<script type="text/javascript" src="./bootstrap3/js/respond.min.js"></script>
+<script src="/js/user.js"></script>
+<!--<script src="/js/product.js"></script>-->
+<script src="/js/detail.js"></script>
+<script src="/js/utils.js"></script>
+<!--<script src="/js/Car.js"></script>-->
+<script src="/js/Hotproduct.js"></script>
+</html>

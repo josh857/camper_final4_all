@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>我的購物車</title>
+    <!--视口/视觉窗口标签:meta, 宽度=设备宽度，初始化缩放比例1， 是否允许用户缩放页面:no -->
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <!-- 扩展对低版本IE支持,开启IE兼容模式-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Bootstrap核心css -->
+    <link rel="stylesheet" type="text/css" href="./bootstrap3/css/bootstrap.css">
+    <!-- 字体图标 -->
+    <link rel="stylesheet" type="text/css" href="./bootstrap3/font-awesome-4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="./css/logo.css">
+    <link rel="stylesheet" type="text/css" href="./css/product.css">
+    <script src="browser_components/vue/dist/vue.js"></script>
+</head>
+<body id="all">
+<header class="container-fluid" id="header">
+    <div class="row">
+        <div class="col-md-3" id="image">
+            <image src="./images/logo.png"></image>
+        </div>
+        <div class="col-md-7" id="top" th:replace="index::head">
+            <ul class="nav nav-pills" id="ul">
+                <li role="presentation"><a href="/index.html" style="color: #080808"><b>首頁</b></a></li>
+                <li role="presentation"><a href="/index_type1.html" style="color: #080808"><b>帳篷</b></a></li>
+                <li role="presentation"><a href="/index_type2.html" style="color: #080808"><b>天幕</b></a></li>
+                <li role="presentation"><a href="/index_type3.html" style="color: #080808"><b>氣墊床</b></a></li>
+
+            </ul>
+        </div>
+        <div class="col-md-2" id="right" th:replace="index::Info">
+            <div id="my">
+                <div class="dropdown">
+                    <b><span>使用者:</span></b>
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="border: none">
+                        <span v-text="userVo.nickname"></span>
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li><a href="/shopList.html">我的購物清單</a></li>
+                        <li><a href="/changePassword.html" v-bind:href="'/changePassword.html?'+userVo.id">更改密碼</a></li>
+                        <li><a href="/logout">登出</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div align="center" id="carApp">
+    <h1><span class="glyphicon glyphicon-shopping-cart"></span>購物車</h1>
+    <form method="get" action="/orders.html" >
+    <table class="table table-bordered" style="width: 750px;height: 200px; border-color: #282828; border-width: medium;text-align:center" v-for="up in products">
+        <tr><td>商品圖片</td><td>商品</td><td>價格</td><td>數量</td></tr>
+        <tr align="center">
+            <td width="50"><img id="img" src="./images/3-4.jpg" v-bind:src="'./images/'+up.images"></td>
+            <td width="100"><p v-text="up.title">[Nature Camper] 4-6 人透氣圓頂露營帳V (入門套裝組)</p></td>
+            <td width="50"><p><span v-text="up.total">3500</span>元</p></td>
+            <td width="100">
+                <div class="p-quantity">
+                    <button type="button" @click="less(up.id)">-</button>
+                   <input style="width: 30px" v-model="up.quantity">
+                    <button type="button" @click="plus(up.id)">+</button>
+                </div>
+                <button type="button" class=" btn btn-primary" @click="deleteproduct(up.id)">刪除</button>
+            </td>
+        </tr>
+    </table>
+    <button type="submit" class="btn btn-primary">確認送出</button>
+    <button type="reset" class="btn btn-primary">取消</button>
+    </form>
+</div>
+<footer id="footer" th:replace="login::ft">
+    <div style="margin:60px" align="center">
+        <p id="tag">
+            <a href="#" class="">FACEBOOK</a>
+            <a href="#">YOUTOBE</a>
+            <a href="#">GOOGLE</a>
+            <a href="#">YAHOO</a>
+            <a href="#">INSTAGRAM</a>
+        </p>
+    </div>
+    <div align="center">
+        <p style="font-size: large ">2022 © NatureCamper </p>
+        <p style="font-size: large ">Contact:123-4567-789</p>
+        <p style="font-size: large ">服務時間: 星期一到五 09:00 - 18:30</p>
+        <p style="font-size: large ">信箱 :NatureCamper@Camper.tw</p>
+    </div>
+</footer>
+
+</body>
+
+
+<!-- jQuery 1.12.4 依赖 -->
+<script type="text/javascript" src="./bootstrap3/jquery.min.js"></script>
+<!-- Bootstrap核心js -->
+<script type="text/javascript" src="./bootstrap3/js/bootstrap.js"></script>
+<!-- 图片占位，解决低版本IE不支持圆角的问题-->
+<script type="text/javascript" src="./bootstrap3/js/holder.js"></script>
+<!-- 引入T5和C3的js函数库，支持旧版浏览器-->
+<script type="text/javascript" src="./bootstrap3/js/html5shiv.min.js"></script>
+<script type="text/javascript" src="./bootstrap3/js/css3-mediaqueries.js"></script>
+<script type="text/javascript" src="./bootstrap3/js/respond.min.js"></script>
+<script src="/js/user.js"></script>
+<script src="/js/utils.js"></script>
+<script src="/js/Car.js"></script>
+<!--<script src="/js/product.js"></script>-->
+</html>

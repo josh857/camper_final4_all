@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <!--视口/视觉窗口标签:meta, 宽度=设备宽度，初始化缩放比例1， 是否允许用户缩放页面:no -->
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+    <!-- 扩展对低版本IE支持,开启IE兼容模式-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Bootstrap核心css -->
+    <link rel="stylesheet" type="text/css" href="./bootstrap3/css/bootstrap.css">
+    <!-- 字体图标 -->
+    <script src="https://kit.fontawesome.com/19a024a8c9.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="./bootstrap3/font-awesome-4.7.0/css/font-awesome.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/login.css">
+    <link rel="stylesheet" type="text/css" href="/css/logo.css">
+    <link rel="stylesheet" href="css/login_2.css">
+    <link rel="stylesheet" href="browser_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="browser_components/font-awesome/css/font-awesome.min.css">
+    <script src="browser_components/polyfill/dist/polyfill.min.js"></script>
+    <script src="browser_components/jquery/dist/jquery.min.js"></script>
+    <script src="browser_components/@popperjs/core/dist/umd/popper.min.js"></script>
+    <script src="browser_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="browser_components/polyfill/dist/polyfill.min.js"></script>
+    <script src="browser_components/vue/dist/vue.js"></script>
+  </head>
+<body id="back">
+<div class="container-fluid">
+  <div align="center" style="margin-bottom: 30px">
+    <H1 style="font-family: Arial">NatureCamper 登入頁</H1>
+  <image src="./images/logo.png"></image>
+  </div>
+  <div id="error" class="alert alert-danger d-none" align="center">
+    <i class="fa fa-exclamation-triangle" ></i> 帳號或密碼錯誤
+  </div>
+  <div id="logout" class="alert alert-info d-none" align="center">
+    <i class="fa fa-exclamation-triangle"></i>  已經登出系統
+  </div>
+  <div id="register" class="alert alert-info d-none" align="center">
+    <i class="fa fa-exclamation-triangle"></i> 已經成功註冊請登入
+  </div>
+  <div align="center" style="border: black;border-width: 3px;margin-left: -30px">
+    <form method="post" action="/login" >
+      <b><span style="font-size:x-large;font-weight: bold;">帳號:</span></b>
+    <input type="text" placeholder="請輸入帳號" size="30px" name="username"><br><br>
+      <span style="font-size: x-large ;font-weight: bold;">密碼:</span>
+      <input type="password" placeholder="請輸入密碼" size="30px" name="password"><br><br>
+      <div align="center" style="margin-left: 30px">
+      <button type="submit" class="btn btn-primary">登入</button>
+      </div>
+    </form>
+    <a href="/register.html" style="margin-left: 30px"><span>還沒有帳號碼?-->新用戶註冊</span></a>
+
+  </div>
+</div>
+<footer id="footer" th:fragment="ft">
+  <div style="margin:60px" align="center">
+    <p id="tag">
+      <a href="https://zh-tw.facebook.com/"><image style="width: 70px; height: 70px" src="./images/facebook.jpg"></image></a>
+      <a href="https://www.youtube.com/?gl=TW&hl=zh-tw"><image style="width: 70px; height: 70px" src="./images/youtube.jpg"></image></a>
+      <a href="https://www.google.com.tw" ><image style="width: 70px; height: 70px" src="./images/google.jpg"></image></a>
+      <a href="https://tw.yahoo.com" ><image style="width: 70px; height: 70px" src="./images/yahoo.jpg"></image></a>
+      <a href="https://www.instagram.com" ><image style="width: 70px; height: 70px" src="./images/instagram.jpg"></image></a>
+    </p>
+  </div>
+  <div align="center">
+    <p style="font-size: large ">2022 © NatureCamper </p>
+    <p style="font-size: large ">Contact:123-4567-789</p>
+    <p style="font-size: large ">服務時間: 星期一到五 09:00 - 18:30</p>
+    <p style="font-size: large ">信箱 :NatureCamper@Camper.tw</p>
+  </div>
+</footer>
+<script>
+  if (location.search == "?error") {
+    $("#error").removeClass("d-none");
+  }
+  if (location.search == "?logout") {
+    $("#logout").removeClass("d-none");
+  }
+  if (location.search == "?register") {
+    $("#register").removeClass("d-none");
+  }
+</script>
+</body>
+</html>

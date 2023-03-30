@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Camper</title>
+    <!--视口/视觉窗口标签:meta, 宽度=设备宽度，初始化缩放比例1， 是否允许用户缩放页面:no -->
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <!-- 扩展对低版本IE支持,开启IE兼容模式-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Bootstrap核心css -->
+    <link rel="stylesheet" type="text/css" href="./bootstrap3/css/bootstrap.css">
+    <!-- 字体图标 -->
+    <script src="https://kit.fontawesome.com/19a024a8c9.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="./bootstrap3/font-awesome-4.7.0/css/font-awesome.css">
+    <script src="browser_components/vue/dist/vue.js"></script>
+</head>
+<body>
+<div  id="upload"  class="container-fluid" align="center" >
+    <div style="background-color: #8fd19e"><h1>批次上傳頁</h1></div>
+    <p>等待上傳項目</p>
+    <div ><span id="hasError" style="color: white; display: none; background-color: red">必須為.txt檔</span></div>
+    <table border="3">
+    <tr>
+        <td v-for="fn in filenames" style="width: 100px">
+            <p v-text="fn"></p>
+        </td>
+    </tr>
+    </table>
+    <div style="margin-top:100px">
+        <form v-on:submit="saveFile">
+            <table border="3">
+                <tr>
+                    <td style="margin-top: 50px">
+                        <input type="file" name="file" id="input">
+                    </td>
+                </tr>
+            </table>
+            <div style="margin-top: 100px">
+            <button v-on:click="uplaod"type="button">確認</button><button type="submit" >上傳</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+<!-- jQuery 1.12.4 依赖 -->
+<script type="text/javascript" src="./bootstrap3/jquery.min.js"></script>
+<!-- Bootstrap核心js -->
+<script type="text/javascript" src="./bootstrap3/js/bootstrap.js"></script>
+<!-- 图片占位，解决低版本IE不支持圆角的问题-->
+<script type="text/javascript" src="./bootstrap3/js/holder.js"></script>
+<!-- 引入T5和C3的js函数库，支持旧版浏览器-->
+<script type="text/javascript" src="./bootstrap3/js/html5shiv.min.js"></script>
+<script type="text/javascript" src="./bootstrap3/js/css3-mediaqueries.js"></script>
+<script type="text/javascript" src="./bootstrap3/js/respond.min.js"></script>
+<script src="/js/uploadFile.js"></script>
+<script src="/js/utils.js"></script>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用戶註冊</title>
+  <!--视口/视觉窗口标签:meta, 宽度=设备宽度，初始化缩放比例1， 是否允许用户缩放页面:no -->
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+  <!-- 扩展对低版本IE支持,开启IE兼容模式-->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- Bootstrap核心css -->
+  <link rel="stylesheet" type="text/css" href="./bootstrap3/css/bootstrap.css">
+  <!-- 字体图标 -->
+  <link rel="stylesheet" type="text/css" href="./bootstrap3/font-awesome-4.7.0/css/font-awesome.css"/>
+  <link rel="stylesheet" type="text/css" href="./css/login.css">
+  <link rel="stylesheet" type="text/css" href="./css/logo.css">
+  <link rel="stylesheet" href="browser_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="browser_components/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="browser_components/plugins/css/vueAlert.css">
+  <script src="browser_components/jquery/dist/jquery.min.js"></script>
+  <script src="browser_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="browser_components/vue/dist/vue.js"></script>
+</head>
+<body id="back">
+<div class="container-fluid"  >
+  <div align="center" style="margin-bottom: 30px">
+    <H1 style="font-family: Arial">NatureCamper 用戶註冊</H1>
+    <image src="./images/logo.png"></image>
+
+  </div>
+
+  <div id="reg" align="center" style="border: black;border-width: 3px;margin-left: -30px" >
+    <div id="error" class="alert alert-danger" style="display: none" v-bind:class="{'d-block':hasError}">
+      <i class="fa fa-exclamation-triangle"></i> <span v-text="message"> 邀请码错误！</span>
+    </div>
+    <form method="post" action="/register" v-on:submit.prevent="register" >
+      <div style="text-align-last: inherit">
+      <span style="font-size: large;font-weight: bold">姓名:</span>
+      <input type="text" placeholder="請輸入姓名" size="30px" name="nickname" v-model="nickname"><br><br>
+      <span style="font-size: large;font-weight: bold">帳號:</span>
+      <input type="text" placeholder="請輸入帳號" size="30px" name="username" v-model="username"><br><br>
+      <span style="font-size: large ;font-weight: bold">密碼:</span>
+      <input type="password" placeholder="請輸入密碼" size="30px" name="password" v-model="password"><br><br>
+        <span style="font-size: large ;font-weight: bold ; margin-left: -35px">密碼確認:</span>
+        <input type="password" placeholder="請再次輸入密碼" size="30px" name="confirm" v-model="confirm"><br><br>
+        <span style="font-size: large ;font-weight: bold">手機:</span>
+        <input type="text" placeholder="請輸入手機" size="30px" name="phone" v-model="phone"><br><br>
+        <span style="font-size: large ;font-weight: bold">地址:</span>
+        <input type="text" placeholder="請輸入地址" size="30px" name="address" v-model="address"><br><br>
+        <button type="submit" class="btn btn-primary">註冊</button>
+  </div>
+    </form>
+  </div>
+</div>
+<footer id="footer">
+  <div style="margin:60px" align="center">
+    <p id="tag">
+      <a href="#" class="">FACEBOOK</a>
+      <a href="#" >YOUTOBE</a>
+      <a href="#" >GOOGLE</a>
+      <a href="#" >YAHOO</a>
+      <a href="#" >INSTAGRAM</a>
+    </p>
+  </div>
+  <div align="center">
+    <p style="font-size: large ">2022 © NatureCamper </p>
+    <p style="font-size: large ">Contact:123-4567-789</p>
+    <p style="font-size: large ">服務時間: 星期一到五 09:00 - 18:30</p>
+    <p style="font-size: large ">信箱 :NatureCamper@Camper.tw</p>
+  </div>
+
+
+</footer>
+</body>
+<!-- jQuery 1.12.4 依赖 -->
+<script type="text/javascript" src="./bootstrap3/jquery.min.js"></script>
+<!-- Bootstrap核心js -->
+<script type="text/javascript" src="./bootstrap3/js/bootstrap.js"></script>
+<!-- 图片占位，解决低版本IE不支持圆角的问题-->
+<script type="text/javascript" src="./bootstrap3/js/holder.js"></script>
+<!-- 引入T5和C3的js函数库，支持旧版浏览器-->
+<script type="text/javascript" src="./bootstrap3/js/html5shiv.min.js"></script>
+<script type="text/javascript" src="./bootstrap3/js/css3-mediaqueries.js"></script>
+<script type="text/javascript" src="./bootstrap3/js/respond.min.js"></script>
+<script src="../js/register.js"></script>
+<script src="../js/utils.js"></script>
+</html>

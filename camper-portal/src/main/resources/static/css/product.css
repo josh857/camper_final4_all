@@ -1,0 +1,19 @@
+#product_content{
+    padding-top: 100px;
+}
+#product_body{
+/*background-image: url("../images/back1.png");*/
+/*    background-repeat: no-repeat;*/
+/*    background-size: cover;*/
+    background-color: whitesmoke;
+}
+.img{
+    height:100px ;
+    width: 100px;
+}
+p{
+}
+#img{
+    width: 100px;
+    height: 100px;
+}
